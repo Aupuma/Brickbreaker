@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,16 +7,24 @@ public class BoardManager : MonoBehaviour
 {
     public static BoardManager instance;
 
+    [Serializable]
+    public struct BoardParameters
+    {
+        public int Rows;
+        public float SpaceBetweenRows;
+        public int Columns;
+        public float SpaceBetweenColumns;
+    }
+
     [SerializeField] private Transform _boardParent;
-    [SerializeField] private Transform _initialSpawnPosition;
-    [SerializeField] private int _rows;
-    [SerializeField] private float _spaceBetweenRows;
-
-    [SerializeField] private int _columns;
-    [SerializeField] private float _spaceBetweenColumns;
-
+    [SerializeField] private Transform _firstSpawnTransform;
     [SerializeField] private Brick[] _brickPrefabs;
-    private List<Brick> _levelBricks;
+    [SerializeField] private BoardParameters _boardParameters;
+    [SerializeField] float _timeBetweenBrickSpawns;
+
+    private int _bricksAmount;
+
+    public event Action BricksDestroyed;
 
     private void Awake()
     {
@@ -33,35 +42,52 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SpawnBoard()
     {
-        for (int i = 0; i < _columns; i++)
+        StartCoroutine(SpawnBoardCoroutine());
+    }
+
+    private IEnumerator SpawnBoardCoroutine()
+    {
+        for (int i = 0; i < _boardParameters.Columns; i++)
         {
-            for (int j = 0; j < _rows; j++)
+            for (int j = 0; j < _boardParameters.Rows; j++)
             {
                 int brickId = GetBrickId();
                 Vector3 brickPosition = GetBrickPosition(i, j);
 
                 SpawnBrick(brickId, brickPosition);
+                yield return new WaitForSeconds(_timeBetweenBrickSpawns);
             }
         }
     }
 
     private void SpawnBrick(int id, Vector3 position)
     {
-        //IF ID == -1 LEAVE A GAP, HOW TO MANAGE THIS WITHOUT KNOWING LIST SIZE?
+        if (id == -1)
+            return;
+
         Brick brickInstance = Instantiate(_brickPrefabs[id], position, Quaternion.identity);
         brickInstance.transform.SetParent(_boardParent);
-        _levelBricks.Add(brickInstance);
+        _bricksAmount++;
+    }
+
+    private void DecreaseBricks()
+    {
+        _bricksAmount--;
+        if(_bricksAmount == 0)
+        {
+            BricksDestroyed?.Invoke();
+        }
     }
 
     private Vector3 GetBrickPosition(int column, int row)
     {
-        return new Vector3(_initialSpawnPosition.position.x + column * _spaceBetweenColumns,
-                            _initialSpawnPosition.position.y + row * _spaceBetweenRows,
-                            _initialSpawnPosition.position.z);
+        return new Vector3(_firstSpawnTransform.position.x + column * _boardParameters.SpaceBetweenColumns,
+                            _firstSpawnTransform.position.y + row * _boardParameters.SpaceBetweenRows,
+                            _firstSpawnTransform.position.z);
     }
 
     private int GetBrickId()
     {
-        return Random.Range(-1, _brickPrefabs.Length);
+        return UnityEngine.Random.Range(-1, _brickPrefabs.Length);
     }
 }

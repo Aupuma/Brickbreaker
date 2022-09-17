@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
 
     private void Throw()
     {
-        _rigidbody.velocity = new Vector3()
+       // _rigidbody.velocity = new Vector3()
     }
 
     private void FixedUpdate()

@@ -1,17 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    [SerializeField] private GameObject _scorePrefab;
-    [SerializeField] private GameObject _destructionParticleSystem;
-    [SerializeField] private GameObject _powerUpToSpawn;
-
-    [SerializeField] private int _hitsToDestroy;
-    [SerializeField] private int _score;
-
+    [SerializeField] private BrickScoreUI _scorePrefab;
+    [SerializeField] private BrickData _data;
     private int _hitsTaken = 0;
 
     private void OnCollisionEnter(Collision collision)
@@ -26,17 +22,25 @@ public class Brick : MonoBehaviour
     private void AddScore()
     {
         //TELL THE GM OR THE BOARD MANAGER TO INCREASE SCORE
-        Instantiate(_scorePrefab);
+        BrickScoreUI scoreInstance = Instantiate(_scorePrefab);
+        scoreInstance.SetScore(_data.Score);
     }
 
     private void TakeHit()
     {
         _hitsTaken++;
-        if(_hitsTaken == _hitsToDestroy)
+        if(_hitsTaken == _data.HitsToDestroy)
         {
-            //SPAWN DESTROY PARTICLE SYSTEM
-            //IF LUCKY, SPAWN POWER UP
-            //TELL THE BOARD MANAGER THAT BRICK HAS BEEN DESTROYED
+            /*
+            Instantiate(_data.DestructionParticleSystem);
+
+            float powerupChance = UnityEngine.Random.Range(0f, 1f);
+            if(powerupChance <= _data.PowerupSpawnChance)
+            {
+                Instantiate(_data.PowerUpToSpawn);
+            }
+            */
+            BoardManager.instance.DecreaseBricks();
         }
     }
 }
