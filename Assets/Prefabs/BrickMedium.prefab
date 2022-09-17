@@ -67,10 +67,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 34e7b377dd8e84d4d82dba669e22f113, type: 2}
+    - target: {fileID: 4373859810416489049, guid: be0835d39b4273b43bbadb21a4929b36,
+        type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f7c35dc0cafb0d46a1a2a8d05947142,
+        type: 2}
     - target: {fileID: 7036228030701326366, guid: be0835d39b4273b43bbadb21a4929b36,
         type: 3}
       propertyPath: m_Name
-      value: Brick (1)
+      value: BrickMedium
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be0835d39b4273b43bbadb21a4929b36, type: 3}

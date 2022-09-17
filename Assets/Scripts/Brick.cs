@@ -40,7 +40,8 @@ public class Brick : MonoBehaviour
                 Instantiate(_data.PowerUpToSpawn);
             }
             */
-            BoardManager.instance.DecreaseBricks();
+            //BoardManager.instance.DecreaseBricks();
+            Destroy(gameObject);
         }
     }
 }

@@ -15,7 +15,8 @@ public class Paddle : MonoBehaviour
     private float xPosition;
 
     private Rigidbody _rigidbody;
-    
+
+
 
     private void Awake()
     {
@@ -42,8 +43,4 @@ public class Paddle : MonoBehaviour
         transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
 }
