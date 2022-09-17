@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speedLimit;
+    [SerializeField] private string _inputAxisName;
 
+
+    private float _speed;
     public float Speed => _speed;
 
     private Rigidbody _rigidbody;
@@ -24,6 +27,11 @@ public class Paddle : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
     {
         
     }

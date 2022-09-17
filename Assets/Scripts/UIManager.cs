@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI _scoreMarkerLabel;
+
+
+    public void ShowLevelCompletedUI()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScoreMarker(int score)
     {
-        
+        _scoreMarkerLabel.text = score.ToString();
+    }
+
+    public void ShowGameOverUI()
+    {
+
     }
 }
