@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private LimitDetector _limitDetector;
+
     [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _ballSpawnTransform;
 
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-
+        Ball ballInstance = Instantiate(_ballPrefab, _ballSpawnTransform.position, Quaternion.identity);
+        //ENABLE CONTROLS
     }
 
 

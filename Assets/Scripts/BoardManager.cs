@@ -33,7 +33,7 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
-        //Initialize bricks list
+        SpawnBoard();
     }
 
     /// <summary>
@@ -42,11 +42,11 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SpawnBoard()
     {
-        StartCoroutine(SpawnBoardCoroutine());
-    }
+        foreach (var item in _boardParent.GetComponentsInChildren<Brick>())
+        {
+            DestroyImmediate(item.gameObject);
+        }
 
-    private IEnumerator SpawnBoardCoroutine()
-    {
         for (int i = 0; i < _boardParameters.Columns; i++)
         {
             for (int j = 0; j < _boardParameters.Rows; j++)
@@ -55,10 +55,14 @@ public class BoardManager : MonoBehaviour
                 Vector3 brickPosition = GetBrickPosition(i, j);
 
                 SpawnBrick(brickId, brickPosition);
-                yield return new WaitForSeconds(_timeBetweenBrickSpawns);
             }
         }
     }
+
+    //private IEnumerator SpawnBoardCoroutine()
+    //{
+
+    //}
 
     private void SpawnBrick(int id, Vector3 position)
     {
@@ -70,7 +74,7 @@ public class BoardManager : MonoBehaviour
         _bricksAmount++;
     }
 
-    private void DecreaseBricks()
+    public void DecreaseBricks()
     {
         _bricksAmount--;
         if(_bricksAmount == 0)
