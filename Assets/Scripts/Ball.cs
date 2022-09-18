@@ -36,6 +36,7 @@ public class Ball : MonoBehaviour
         //{
         //    _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _speedLimit);
         //}
+        //_rigidbody.velocity = _rigidbody.velocity.normalized * _speedLimit;
         _lastVelocity = _rigidbody.velocity;
     }
 
@@ -55,9 +56,23 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        float offsetAngle = Random.Range(-5, 5f);
-        offsetAngle *= Mathf.Deg2Rad;
         Vector3 reflectedVector = Vector3.Reflect(_lastVelocity, collision.contacts[0].normal);
-        _rigidbody.velocity = reflectedVector.normalized  * _speedLimit;
+        _rigidbody.velocity = (reflectedVector.normalized + AddNoiseOnAngle(4,6)) * _speedLimit;
+    }
+
+    Vector3 AddNoiseOnAngle(float min, float max)
+    {
+        // Find random angle between min & max inclusive
+        float xNoise = Random.Range(min, max);
+        float yNoise = Random.Range(min, max);
+        float zNoise = Random.Range(min, max);
+
+        // Convert Angle to Vector3
+        Vector3 noise = new Vector3(
+          Mathf.Sin(2 * Mathf.PI * xNoise / 360),
+          Mathf.Sin(2 * Mathf.PI * yNoise / 360),
+          Mathf.Sin(2 * Mathf.PI * zNoise / 360)
+        );
+        return noise;
     }
 }

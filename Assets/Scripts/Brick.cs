@@ -15,7 +15,7 @@ public class Brick : MonoBehaviour
         if(collision.gameObject.tag == "Ball")
         {
             TakeHit();
-            AddScore();
+            //AddScore();
         }
     }
 
