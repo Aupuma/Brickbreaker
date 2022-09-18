@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    //TODO: Convert data to scriptable object
     [SerializeField] private float _speedLimit;
     [SerializeField] private float _startTime;
     [SerializeField] private float _minReflectionAngleNoise;
@@ -36,18 +37,7 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (_rigidbody.velocity.magnitude > _speedLimit)
-        //{
-        //    _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _speedLimit);
-        //}
-        //_rigidbody.velocity = _rigidbody.velocity.normalized * _speedLimit;
         _lastVelocity = _rigidbody.velocity;
-    }
-
-    public void Explode()
-    {
-       // Instantiate(_explosionParticleSystem);
-        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -56,6 +46,12 @@ public class Ball : MonoBehaviour
         _rigidbody.velocity = (reflectedVector.normalized + AddNoiseOnAngle(_minReflectionAngleNoise, _maxReflectionAngleNoise)) * _speedLimit;
 
         _audioSource.Play();
+    }
+
+    public void Explode()
+    {
+        // Instantiate(_explosionParticleSystem);
+        Destroy(gameObject);
     }
 
     Vector3 AddNoiseOnAngle(float min, float max)

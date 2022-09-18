@@ -24,7 +24,7 @@ public class BrickScoreUI : MonoBehaviour
     {
         Vector3 initialPosition = transform.position;
         Vector3 finalPosition = new Vector3(initialPosition.x, initialPosition.y + _heightToMove, initialPosition.z);
-        for (float t = 0; t <= 1; t += Time.deltaTime/_duration)
+        for (float t = 0f; t <= 1f; t += Time.deltaTime/_duration)
         {
             _scoreLabel.color = Color.Lerp(Color.white, Color.clear, t);
             transform.position = Vector3.Lerp(initialPosition, finalPosition, t);

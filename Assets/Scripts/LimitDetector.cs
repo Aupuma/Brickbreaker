@@ -7,7 +7,7 @@ public class LimitDetector : MonoBehaviour
 {
     private BoxCollider _boxCollider;
 
-    public event Action BallLost;
+    public event Action<Ball> BallLost;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class LimitDetector : MonoBehaviour
         {
             Ball ball = other.GetComponent<Ball>();
             ball.Explode();
-            BallLost?.Invoke();
+            BallLost?.Invoke(ball);
         }
     }
 }

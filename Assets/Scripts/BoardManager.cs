@@ -33,7 +33,7 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnBoard();
+        //SpawnBoard();
     }
 
     /// <summary>
