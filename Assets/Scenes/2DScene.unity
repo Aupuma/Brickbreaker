@@ -4054,6 +4054,11 @@ PrefabInstance:
       propertyPath: _speedIncreaseMultiplier
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1003742227728307053, guid: 3aab16952064a5c4a816a43c7b0bb75d,
+        type: 3}
+      propertyPath: _ballBounceSpeedInfluence
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 2314181474179598712, guid: 3aab16952064a5c4a816a43c7b0bb75d,
         type: 3}
       propertyPath: m_RootOrder

@@ -15,7 +15,7 @@ public class BallsManager : MonoBehaviour
     void Start()
     {
         _balls = new List<Ball>();
-        BallData.Speed = BallData.InitialSpeed;
+        ResetBallGlobalSpeed();
     }
 
     public void CreateBall()
@@ -51,5 +51,10 @@ public class BallsManager : MonoBehaviour
     public void IncreaseBallGlobalSpeed()
     {
         BallData.Speed += BallData.SpeedLevelIncrease;
+    }
+
+    public void ResetBallGlobalSpeed()
+    {
+        BallData.Speed = BallData.InitialSpeed;
     }
 }

@@ -7,6 +7,7 @@ public class Paddle : MonoBehaviour
     //TODO: COnvert data to scriptable object
     [SerializeField] private float _speed;
     [SerializeField] private float _speedLevelIncrease;
+    [SerializeField] private float _ballBounceSpeedInfluence;
     [SerializeField] private string _inputAxisName;
 
     private float delta;
@@ -45,7 +46,8 @@ public class Paddle : MonoBehaviour
 
     public Vector3 GetSpeedVector()
     {
-        return new Vector3(delta*100, 0f, 0f);
+        Debug.Log(delta * _ballBounceSpeedInfluence);
+        return new Vector3(delta * _ballBounceSpeedInfluence, 0f, 0f);
     }
 
     public void IncreaseSpeed()
