@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
         _score = 0;
         _uiManager.UpdateScoreMarker(0);
 
+        _ballsManager.ResetBallGlobalSpeed();
+        _paddle.ResetSpeed();
+
         PrepareGame();
     }
 

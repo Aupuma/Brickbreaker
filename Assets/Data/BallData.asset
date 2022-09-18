@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04292bf90869bdb429dce29d5ad68e52, type: 3}
   m_Name: BallData
   m_EditorClassIdentifier: 
-  InitialSpeed: 10
   WaitTime: 1
-  MinReflectionAngleNoise: 5
-  MaxReflectionAngleNoise: 10
+  MinReflectionAngleNoise: -5
+  MaxReflectionAngleNoise: 5
   MaxStartAngleOffset: 30

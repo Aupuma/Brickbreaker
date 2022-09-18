@@ -5,13 +5,14 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     //TODO: COnvert data to scriptable object
-    [SerializeField] private float _speed;
+    [SerializeField] private float _initialSpeed;
     [SerializeField] private float _speedLevelIncrease;
     [SerializeField] private float _ballBounceSpeedInfluence;
     [SerializeField] private string _inputAxisName;
 
-    private float delta;
-    private float xPosition;
+    private float _speed;
+    private float _delta;
+    private float _xPosition;
     private bool _isInputEnabled;
 
     public bool IsInputEnabled { get => _isInputEnabled; set => _isInputEnabled = value; }
@@ -19,14 +20,19 @@ public class Paddle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xPosition = transform.position.x;
+        _xPosition = transform.position.x;
         _isInputEnabled = false;
     }
 
     public void ResetPosition()
     {
-        xPosition = 0f;
-        transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+        _xPosition = 0f;
+        transform.position = new Vector3(_xPosition, transform.position.y, transform.position.z);
+    }
+
+    public void ResetSpeed()
+    {
+        _speed = _initialSpeed;
     }
 
     // Update is called once per frame
@@ -38,16 +44,15 @@ public class Paddle : MonoBehaviour
 
     private void ManageInput()
     {
-        delta = Input.GetAxis(_inputAxisName) * _speed * Time.deltaTime;
-        xPosition = Mathf.Clamp(xPosition + delta, -4.5f, 4.5f);
+        _delta = Input.GetAxis(_inputAxisName) * _speed * Time.deltaTime;
+        _xPosition = Mathf.Clamp(_xPosition + _delta, -4.5f, 4.5f);
 
-        transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+        transform.position = new Vector3(_xPosition, transform.position.y, transform.position.z);
     }
 
     public Vector3 GetSpeedVector()
     {
-        Debug.Log(delta * _ballBounceSpeedInfluence);
-        return new Vector3(delta * _ballBounceSpeedInfluence, 0f, 0f);
+        return new Vector3(_delta * _ballBounceSpeedInfluence, 0f, 0f);
     }
 
     public void IncreaseSpeed()

@@ -4022,43 +4022,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1178146717, guid: 3aab16952064a5c4a816a43c7b0bb75d, type: 3}
-      propertyPath: m_Drag
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1178146717, guid: 3aab16952064a5c4a816a43c7b0bb75d, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1178146718, guid: 3aab16952064a5c4a816a43c7b0bb75d, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003742227728307053, guid: 3aab16952064a5c4a816a43c7b0bb75d,
-        type: 3}
-      propertyPath: _speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003742227728307053, guid: 3aab16952064a5c4a816a43c7b0bb75d,
-        type: 3}
-      propertyPath: _speedLimit
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003742227728307053, guid: 3aab16952064a5c4a816a43c7b0bb75d,
-        type: 3}
-      propertyPath: _speedLevelIncrease
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003742227728307053, guid: 3aab16952064a5c4a816a43c7b0bb75d,
-        type: 3}
-      propertyPath: _speedIncreaseMultiplier
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003742227728307053, guid: 3aab16952064a5c4a816a43c7b0bb75d,
-        type: 3}
-      propertyPath: _ballBounceSpeedInfluence
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 2314181474179598712, guid: 3aab16952064a5c4a816a43c7b0bb75d,
         type: 3}
       propertyPath: m_RootOrder
@@ -4119,8 +4082,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paddle
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1178146717, guid: 3aab16952064a5c4a816a43c7b0bb75d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aab16952064a5c4a816a43c7b0bb75d, type: 3}
 --- !u!1 &1450280702
 GameObject:

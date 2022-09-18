@@ -259,11 +259,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2314181474179598712}
   - component: {fileID: 1003742227728307053}
-  - component: {fileID: 1178146717}
   - component: {fileID: 1178146718}
   m_Layer: 0
   m_Name: Paddle
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,25 +297,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d075783f42bab4fa78bd3ed22f2462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedLimit: 2
-  _speedIncreaseMultiplier: 10
+  _initialSpeed: 15
+  _speedLevelIncrease: 5
+  _ballBounceSpeedInfluence: 50
   _inputAxisName: Horizontal
---- !u!54 &1178146717
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7469224689592552480}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 124
-  m_CollisionDetection: 1
 --- !u!65 &1178146718
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -324,7 +308,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7469224689592552480}
-  m_Material: {fileID: 13400000, guid: ea7044c788c841a4f828430d389095f7, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
