@@ -9,12 +9,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreMarkerLabel;
     [SerializeField] private TextMeshProUGUI _countDownUI;
     [SerializeField] private TextMeshProUGUI _levelCompletedUI;
+    [SerializeField] private TextMeshProUGUI _gameOverUI;
+    [SerializeField] private LivesIndicator _livesIndicator;
 
     public event Action LevelCompletedUIShown;
     public event Action GameOverUIShown;
     public event Action CountdownFinished;
 
-    public void StartCoundown()
+    public void StartCountdown()
     {
         _countDownUI.gameObject.SetActive(true);
         StartCoroutine(PlayCountdown());
@@ -57,14 +59,29 @@ public class UIManager : MonoBehaviour
         _scoreMarkerLabel.text = score.ToString();
     }
 
-    public void ResetScoreMarker()
-    {
-        _scoreMarkerLabel.text = "0";
-    }
+
 
     public void ShowGameOverUI()
     {
+        _gameOverUI.gameObject.SetActive(true);
+        StartCoroutine(PlayGameOverUICoroutine());
+    }
 
+    private IEnumerator PlayGameOverUICoroutine()
+    {
+        yield return FadeOutText(_gameOverUI, Color.white, 1f);
+        _gameOverUI.gameObject.SetActive(false);
+        GameOverUIShown?.Invoke();
+    }
+
+    public void RefillLivesUI(int lives)
+    {
+        _livesIndicator.Refill(lives);
+    }
+
+    public void RemoveLifeUI()
+    {
+        _livesIndicator.RemoveLife();
     }
 
     private IEnumerator FadeOutText(TextMeshProUGUI textLabel,Color startColor, float duration)
@@ -75,4 +92,6 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
     }
+
+
 }

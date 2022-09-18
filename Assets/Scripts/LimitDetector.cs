@@ -31,7 +31,6 @@ public class LimitDetector : MonoBehaviour
         if(other.tag == "Ball")
         {
             Ball ball = other.GetComponent<Ball>();
-            ball.Explode();
             BallLost?.Invoke(ball);
         }
     }

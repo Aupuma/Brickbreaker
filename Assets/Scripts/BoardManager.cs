@@ -42,6 +42,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SpawnBoard()
     {
+        _bricksAmount = 0;
         foreach (var item in _boardParent.GetComponentsInChildren<Brick>())
         {
             DestroyImmediate(item.gameObject);

@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class LivesIndicator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _LifeIndicatorUI;
+
+    private void Start()
     {
-        
+        //Empty();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Refill(int lives)
     {
-        
+        for (int i = 0; i < lives; i++)
+        {
+            Instantiate(_LifeIndicatorUI, transform);
+        }
     }
+
+    private void Empty()
+    {
+        while(transform.childCount > 0)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+        }
+    }
+
+    public void RemoveLife()
+    {
+        Destroy(transform.GetChild(transform.childCount - 1).gameObject);
+    }
+
 }

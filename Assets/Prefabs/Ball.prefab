@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81814edc0fc9a57419f0718607fc0125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedLimit: 30
-  _startTime: 0
+  _speedLimit: 15
+  _startTime: 1
   _minReflectionAngleNoise: -10
   _maxReflectionAngleNoise: 10
   _explosionParticleSystem: {fileID: 0}

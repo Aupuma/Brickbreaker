@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class BallsManager : MonoBehaviour
     [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _ballSpawnTransform;
     private List<Ball> _balls;
+
+    public event Action AllBallsLost;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,7 @@ public class BallsManager : MonoBehaviour
         DestroyBall(ball);
         if(_balls.Count == 0)
         {
-            //TELL GM TO LOSE LIFE
+            AllBallsLost?.Invoke();
         }
     }
 

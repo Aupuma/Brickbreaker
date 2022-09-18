@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LimitDetector _limitDetector;
     [SerializeField] private Paddle _paddle;
 
-    [SerializeField] private int initialLives;
+    [SerializeField] private int _initialLives;
 
     private int _score;
     private int _lives;
@@ -25,8 +25,23 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _boardManager.BricksDestroyed += BoardManager_BricksDestroyed;
-       // _limitDetector.BallLost += LimitDetector_BallLost;
+        _boardManager.BricksDestroyed += LevelComplete;
+
+        _uiManager.GameOverUIShown += ResetGame;
+
+        _limitDetector.BallLost += _ballsManager.LoseBall;
+        _ballsManager.AllBallsLost += LoseLife;
+
+        Invoke("ResetGame", 1f);
+    }
+
+    private void ResetGame()
+    {
+        _lives = _initialLives;
+        _uiManager.RefillLivesUI(_initialLives);
+
+        _score = 0;
+        _uiManager.UpdateScoreMarker(0);
 
         PrepareGame();
     }
@@ -35,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         _boardManager.SpawnBoard();
         _paddle.ResetPosition();
-        _uiManager.StartCoundown();
+        _uiManager.StartCountdown();
 
         _uiManager.CountdownFinished += StartGame;
     }
@@ -43,13 +58,12 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         _uiManager.CountdownFinished -= StartGame;
+
         _ballsManager.CreateBall();
         _paddle.IsInputEnabled = true;
     }
 
-
-
-    private void BoardManager_BricksDestroyed()
+    private void LevelComplete()
     {
         _ballsManager.DestroyAllBalls();
         _paddle.IsInputEnabled = false;
@@ -67,24 +81,33 @@ public class GameManager : MonoBehaviour
         PrepareGame();
     }
 
-    private void LoseLife()
-    {
-        _lives--;
-        if (_lives == 0)
-            _uiManager.ShowGameOverUI();
-        //RESTART LEVEL
-    }
-
     public void AddScore(int score)
     {
         _score += score;
         _uiManager.UpdateScoreMarker(_score);
     }
 
-    private void SpawnBall()
+    public void LoseLife()
     {
+        _lives--;
+        _uiManager.RemoveLifeUI();
 
+        if(_lives == 0)
+        {
+            FinishGame();
+        }
+        else
+        {
+            _ballsManager.CreateBall();
+        }
     }
+
+    private void FinishGame()
+    {
+        _paddle.IsInputEnabled = false;
+        _uiManager.ShowGameOverUI();
+    }
+
 
 
     // Update is called once per frame
@@ -97,7 +120,10 @@ public class GameManager : MonoBehaviour
     {
         _uiManager.LevelCompletedUIShown -= IncreaseLevel;
         _uiManager.CountdownFinished -= StartGame;
-        _boardManager.BricksDestroyed -= BoardManager_BricksDestroyed;
-     //   _limitDetector.BallLost -= LimitDetector_BallLost;
+        _uiManager.GameOverUIShown -= ResetGame;
+        _boardManager.BricksDestroyed -= LevelComplete;
+        
+        _limitDetector.BallLost -= _ballsManager.LoseBall;
+        _ballsManager.AllBallsLost -= LoseLife;
     }
 }
