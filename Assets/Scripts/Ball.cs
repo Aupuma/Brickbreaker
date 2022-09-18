@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private float _speedLimit;
     [SerializeField] private float _startTime;
+    [SerializeField] private float _minReflectionAngleNoise;
+    [SerializeField] private float _maxReflectionAngleNoise;
 
     [SerializeField] GameObject _explosionParticleSystem;
 
@@ -57,7 +59,7 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 reflectedVector = Vector3.Reflect(_lastVelocity, collision.contacts[0].normal);
-        _rigidbody.velocity = (reflectedVector.normalized + AddNoiseOnAngle(4,6)) * _speedLimit;
+        _rigidbody.velocity = (reflectedVector.normalized + AddNoiseOnAngle(_minReflectionAngleNoise, _maxReflectionAngleNoise)) * _speedLimit;
     }
 
     Vector3 AddNoiseOnAngle(float min, float max)
@@ -73,6 +75,7 @@ public class Ball : MonoBehaviour
           Mathf.Sin(2 * Mathf.PI * yNoise / 360),
           Mathf.Sin(2 * Mathf.PI * zNoise / 360)
         );
+        Debug.Log(noise);
         return noise;
     }
 }

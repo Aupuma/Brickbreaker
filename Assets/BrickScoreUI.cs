@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class BrickScoreUI : MonoBehaviour
 {
-    private TextMeshPro _scoreLabel;
+    [SerializeField] private float _duration;
+    [SerializeField] private float _heightToMove;
+    private TextMeshPro _scoreLabel; 
 
     private void Awake()
     {
@@ -20,8 +22,14 @@ public class BrickScoreUI : MonoBehaviour
 
     private IEnumerator ShowScoreCoroutine()
     {
-
-        yield return new WaitForSeconds(1f);
+        Vector3 initialPosition = transform.position;
+        Vector3 finalPosition = new Vector3(initialPosition.x, initialPosition.y + _heightToMove, initialPosition.z);
+        for (float t = 0; t <= 1; t += Time.deltaTime/_duration)
+        {
+            _scoreLabel.color = Color.Lerp(Color.white, Color.clear, t);
+            transform.position = Vector3.Lerp(initialPosition, finalPosition, t);
+            yield return null;
+        }
         Destroy(gameObject);
     }
 }

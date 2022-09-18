@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 7772532324145661731}
   - component: {fileID: 7777592218027728243}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,3 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81814edc0fc9a57419f0718607fc0125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speedLimit: 0
+  _startTime: 0
+  _minReflectionAngleNoise: -5
+  _maxReflectionAngleNoise: 5
+  _explosionParticleSystem: {fileID: 0}

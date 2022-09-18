@@ -7,6 +7,8 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [SerializeField] private BrickScoreUI _scorePrefab;
+    [SerializeField] private Transform _scoreSpawnTransform;
+
     [SerializeField] private BrickData _data;
     private int _hitsTaken = 0;
 
@@ -15,14 +17,14 @@ public class Brick : MonoBehaviour
         if(collision.gameObject.tag == "Ball")
         {
             TakeHit();
-            //AddScore();
+            AddScore();
         }
     }
 
     private void AddScore()
     {
         //TELL THE GM OR THE BOARD MANAGER TO INCREASE SCORE
-        BrickScoreUI scoreInstance = Instantiate(_scorePrefab);
+        BrickScoreUI scoreInstance = Instantiate(_scorePrefab, _scoreSpawnTransform.position,Quaternion.identity);
         scoreInstance.SetScore(_data.Score);
     }
 
