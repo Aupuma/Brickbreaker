@@ -5,22 +5,15 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     //TODO: COnvert data to scriptable object
-    [SerializeField] private float _speedIncreaseMultiplier;
+    [SerializeField] private float _speed;
     [SerializeField] private float _speedLevelIncrease;
     [SerializeField] private string _inputAxisName;
 
+    private float delta;
     private float xPosition;
     private bool _isInputEnabled;
-    private float _speed;
-    private Rigidbody _rigidbody;
 
     public bool IsInputEnabled { get => _isInputEnabled; set => _isInputEnabled = value; }
-    public float Speed => _speed;
-
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +24,7 @@ public class Paddle : MonoBehaviour
 
     public void ResetPosition()
     {
+        xPosition = 0f;
         transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
     }
 
@@ -43,14 +37,19 @@ public class Paddle : MonoBehaviour
 
     private void ManageInput()
     {
-        float delta = Input.GetAxis(_inputAxisName) * _speedIncreaseMultiplier * Time.deltaTime;
+        delta = Input.GetAxis(_inputAxisName) * _speed * Time.deltaTime;
         xPosition = Mathf.Clamp(xPosition + delta, -4.5f, 4.5f);
 
         transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
     }
 
+    public Vector3 GetSpeedVector()
+    {
+        return new Vector3(delta*100, 0f, 0f);
+    }
+
     public void IncreaseSpeed()
     {
-        _speedIncreaseMultiplier += _speedLevelIncrease;
+        _speed += _speedLevelIncrease;
     }
 }

@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Brick Data", menuName = "ScriptableObjects/BallData")]
+[CreateAssetMenu(fileName = "Ball Data", menuName = "ScriptableObjects/BallData")]
 public class BallData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static float InitialSpeed = 10f;
+    public static float SpeedLevelIncrease = 5f;
+    public static float Speed;
+    public float WaitTime;
+    public float MinReflectionAngleNoise;
+    public float MaxReflectionAngleNoise;
+    public float MaxStartAngleOffset;
 }

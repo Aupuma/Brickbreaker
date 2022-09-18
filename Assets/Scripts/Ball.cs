@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    //TODO: Convert data to scriptable object
-
-    public static float Speed;
-    public static float SpeedLevelIncrease = 10f;
-    [SerializeField] private float _speedLimit;
-    [SerializeField] private float _startTime;
-    [SerializeField] private float _minReflectionAngleNoise;
-    [SerializeField] private float _maxReflectionAngleNoise;
-
+    [SerializeField] BallData _data;
     [SerializeField] GameObject _explosionParticleSystem;
+    [SerializeField] AudioClip _bounceClip;
 
     private AudioSource _audioSource;
     private Rigidbody _rigidbody;
@@ -28,15 +21,15 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Speed = _speedLimit;
-        Invoke("Throw", _startTime);
+        Invoke("Throw", _data.WaitTime);
     }
 
     private void Throw()
     {
-        float randomAngle = Random.Range(-30f, 30f);
+        float randomAngle = 90 + Random.Range(-_data.MaxStartAngleOffset, _data.MaxStartAngleOffset);
         randomAngle *= Mathf.Deg2Rad;
-        _rigidbody.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * _speedLimit;
+
+        _rigidbody.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * BallData.Speed;
     }
 
     private void FixedUpdate()
@@ -46,10 +39,24 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 reflectedVector = Vector3.Reflect(_lastVelocity, collision.contacts[0].normal);
-        _rigidbody.velocity = (reflectedVector.normalized + AddNoiseOnAngle(_minReflectionAngleNoise, _maxReflectionAngleNoise)) * _speedLimit;
+        Bounce(collision);
+        _audioSource.PlayOneShot(_bounceClip);
+    }
 
-        _audioSource.Play();
+    private void Bounce(Collision collision)
+    {
+        Vector3 reflectedVector = Vector3.Reflect(_lastVelocity, collision.contacts[0].normal);
+
+        if (collision.gameObject.tag == "Paddle")
+        {
+            Paddle paddle = collision.gameObject.GetComponent<Paddle>();
+            _rigidbody.velocity = reflectedVector.normalized + paddle.GetSpeedVector();
+        }
+        else
+        {
+            _rigidbody.velocity = reflectedVector.normalized + AddNoiseOnAngle(_data.MinReflectionAngleNoise, _data.MaxReflectionAngleNoise);
+        }
+        _rigidbody.velocity = _rigidbody.velocity.normalized * BallData.Speed;
     }
 
     public void Explode()
@@ -58,7 +65,7 @@ public class Ball : MonoBehaviour
         Destroy(gameObject);
     }
 
-    Vector3 AddNoiseOnAngle(float min, float max)
+    private Vector3 AddNoiseOnAngle(float min, float max)
     {
         // Find random angle between min & max inclusive
         float xNoise = Random.Range(min, max);
