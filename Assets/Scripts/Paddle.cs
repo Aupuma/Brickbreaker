@@ -5,8 +5,8 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     //TODO: COnvert data to scriptable object
-    [SerializeField] private float _speedLimit;
     [SerializeField] private float _speedIncreaseMultiplier;
+    [SerializeField] private float _speedLevelIncrease;
     [SerializeField] private string _inputAxisName;
 
     private float xPosition;
@@ -25,7 +25,13 @@ public class Paddle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        xPosition = transform.position.x;
         _isInputEnabled = false;
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
@@ -41,5 +47,10 @@ public class Paddle : MonoBehaviour
         xPosition = Mathf.Clamp(xPosition + delta, -4.5f, 4.5f);
 
         transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+    }
+
+    public void IncreaseSpeed()
+    {
+        _speedIncreaseMultiplier += _speedLevelIncrease;
     }
 }

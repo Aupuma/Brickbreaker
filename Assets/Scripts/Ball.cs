@@ -5,6 +5,9 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     //TODO: Convert data to scriptable object
+
+    public static float Speed;
+    public static float SpeedLevelIncrease = 10f;
     [SerializeField] private float _speedLimit;
     [SerializeField] private float _startTime;
     [SerializeField] private float _minReflectionAngleNoise;
@@ -25,6 +28,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Speed = _speedLimit;
         Invoke("Throw", _startTime);
     }
 
