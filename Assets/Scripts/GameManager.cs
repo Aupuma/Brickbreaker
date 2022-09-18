@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _boardManager.BricksDestroyed += BoardManager_BricksDestroyed;
-        _limitDetector.BallLost += LimitDetector_BallLost;
+        //_limitDetector.BallLost += LimitDetector_BallLost;
     }
 
     private void PrepareGame()
     {
         _boardManager.SpawnBoard();
-        _uiManager.StartCoundown();
+        //_uiManager.StartCoundown();
     }
 
     private void StartGame()
@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        _limitDetector.BallLost -= LimitDetector_BallLost;
+        _boardManager.BricksDestroyed += BoardManager_BricksDestroyed;
+        //_limitDetector.BallLost -= LimitDetector_BallLost;
     }
 }

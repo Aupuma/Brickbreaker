@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _scoreMarkerLabel;
     [SerializeField] private TextMeshProUGUI _countDownUI;
+    [SerializeField] private GameObject _levelCompletedUI;
 
     public void StartCoundown()
     {
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowLevelCompletedUI()
     {
-
+        _levelCompletedUI.SetActive(true);
     }
 
     public void UpdateScoreMarker(int score)

@@ -11,11 +11,13 @@ public class Ball : MonoBehaviour
 
     [SerializeField] GameObject _explosionParticleSystem;
 
+    private AudioSource _audioSource;
     private Rigidbody _rigidbody;
     private Vector3 _lastVelocity;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -48,18 +50,12 @@ public class Ball : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    float randomAngle = Random.Range(0,360f);
-    //    randomAngle *= Mathf.Deg2Rad;
-    //    _rigidbody.velocity = -collision.contacts[0].normal + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)) * _speedLimit;
-    //}
-
-
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 reflectedVector = Vector3.Reflect(_lastVelocity, collision.contacts[0].normal);
         _rigidbody.velocity = (reflectedVector.normalized + AddNoiseOnAngle(_minReflectionAngleNoise, _maxReflectionAngleNoise)) * _speedLimit;
+
+        _audioSource.Play();
     }
 
     Vector3 AddNoiseOnAngle(float min, float max)
@@ -75,7 +71,6 @@ public class Ball : MonoBehaviour
           Mathf.Sin(2 * Mathf.PI * yNoise / 360),
           Mathf.Sin(2 * Mathf.PI * zNoise / 360)
         );
-        Debug.Log(noise);
         return noise;
     }
 }

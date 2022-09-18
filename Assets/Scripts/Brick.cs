@@ -23,9 +23,10 @@ public class Brick : MonoBehaviour
 
     private void AddScore()
     {
-        //TELL THE GM OR THE BOARD MANAGER TO INCREASE SCORE
         BrickScoreUI scoreInstance = Instantiate(_scorePrefab, _scoreSpawnTransform.position,Quaternion.identity);
         scoreInstance.SetScore(_data.Score);
+
+        GameManager.instance.AddScore(_data.Score);
     }
 
     private void TakeHit()
@@ -42,7 +43,7 @@ public class Brick : MonoBehaviour
                 Instantiate(_data.PowerUpToSpawn);
             }
             */
-            //BoardManager.instance.DecreaseBricks();
+            BoardManager.instance.DecreaseBricks();
             Destroy(gameObject);
         }
     }

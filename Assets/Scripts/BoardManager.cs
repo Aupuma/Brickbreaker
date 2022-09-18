@@ -19,8 +19,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Transform _boardParent;
     [SerializeField] private Transform _firstSpawnTransform;
     [SerializeField] private Brick[] _brickPrefabs;
-    [SerializeField] private BoardParameters _boardParameters;
     [SerializeField] float _timeBetweenBrickSpawns;
+    [SerializeField] private BoardParameters _boardParameters;
 
     private int _bricksAmount;
 
