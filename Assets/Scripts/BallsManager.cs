@@ -24,6 +24,16 @@ public class BallsManager : MonoBehaviour
         _balls.Add(ballInstance);
     }
 
+    public void AddBalls(int amount)
+    {
+        Debug.Log("Addballs");
+        for (int j = 0; j < amount; j++)
+        {
+            Ball ballInstance = Instantiate(_ballPrefab, _balls[0].transform.position, Quaternion.identity);
+            _balls.Add(ballInstance);
+        }
+    }
+
     public void LoseBall(Ball ball)
     {
         DestroyBall(ball);

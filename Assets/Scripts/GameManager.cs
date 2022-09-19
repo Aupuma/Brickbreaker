@@ -105,6 +105,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddBalls(int amount)
+    {
+        _ballsManager.AddBalls(amount);
+    }
+
+
     private void FinishGame()
     {
         _paddle.IsInputEnabled = false;

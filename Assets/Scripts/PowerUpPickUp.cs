@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,10 @@ using UnityEngine;
 public class PowerUpPickUp : MonoBehaviour
 {
     [SerializeField] private float _fallingSpeed;
-    [SerializeField] private PowerUpEffect _effect;
 
     private Rigidbody _rigidbody;
+
+    public event Action Collected;
 
     private void Awake()
     {
@@ -23,7 +25,10 @@ public class PowerUpPickUp : MonoBehaviour
     {
         if(other.tag == "Paddle")
         {
-
+            Collected?.Invoke();
+            gameObject.SetActive(false);
         }
+
     }
+
 }

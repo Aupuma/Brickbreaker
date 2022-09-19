@@ -34,15 +34,15 @@ public class Brick : MonoBehaviour
         _hitsTaken++;
         if(_hitsTaken == _data.HitsToDestroy)
         {
-            /*
-            Instantiate(_data.DestructionParticleSystem);
+            
+            //Instantiate(_data.DestructionParticleSystem);
 
             float powerupChance = UnityEngine.Random.Range(0f, 1f);
-            if(powerupChance <= _data.PowerupSpawnChance)
+            if(powerupChance <= _data.PowerupSpawnChance && _data.PowerUpToSpawn!=null)
             {
-                Instantiate(_data.PowerUpToSpawn);
+                Instantiate(_data.PowerUpToSpawn, transform.position,Quaternion.identity);
             }
-            */
+            
             BoardManager.instance.DecreaseBricks();
             Destroy(gameObject);
         }

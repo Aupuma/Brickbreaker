@@ -6,24 +6,35 @@ using UnityEngine;
 public class LimitDetector : MonoBehaviour
 {
     private BoxCollider _boxCollider;
+    private MeshRenderer _renderer;
 
     public event Action<Ball> BallLost;
 
     private void Awake()
     {
         _boxCollider = GetComponent<BoxCollider>();
+        _renderer = GetComponent<MeshRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetLimitActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void SetLimitActive(bool active)
     {
-        
+        if (active)
+        {
+            _boxCollider.isTrigger = true;
+            _renderer.enabled = false;
+        }
+        else
+        {
+            _boxCollider.isTrigger = false;
+            _renderer.enabled = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,10 +43,6 @@ public class LimitDetector : MonoBehaviour
         {
             Ball ball = other.GetComponent<Ball>();
             BallLost?.Invoke(ball);
-        }
-        if(other.tag == "PickUp")
-        {
-            //PowerUpPickUp
         }
     }
 }

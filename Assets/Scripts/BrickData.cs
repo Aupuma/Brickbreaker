@@ -6,7 +6,7 @@ using UnityEngine;
 public class BrickData : ScriptableObject
 {
     public GameObject DestructionParticleSystem;
-    public GameObject PowerUpToSpawn;
+    public PowerUp PowerUpToSpawn;
 
     [Range(0,1)] public float PowerupSpawnChance;
     public int HitsToDestroy;

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class PowerUpEffect : MonoBehaviour
 {
     [SerializeField] private float _duration;
+    [SerializeField] private PowerUpPickUp pickUp;
 
     private bool _isEffectActive;
     private float _effectTimer;
