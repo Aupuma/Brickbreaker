@@ -35,7 +35,7 @@ public class LimitDetector : MonoBehaviour
         }
         if(other.tag == "PickUp")
         {
-            PowerUpPickUp
+            //PowerUpPickUp
         }
     }
 }

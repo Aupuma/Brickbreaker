@@ -12,4 +12,5 @@ public class BallData : ScriptableObject
     public float MinReflectionAngleNoise;
     public float MaxReflectionAngleNoise;
     public float MaxStartAngleOffset;
+    public float MinReflectionVector;
 }

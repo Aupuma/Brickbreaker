@@ -54,7 +54,7 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            _rigidbody.velocity = reflectedVector.normalized + AddNoiseOnAngle(_data.MinReflectionAngleNoise, _data.MaxReflectionAngleNoise);
+            _rigidbody.velocity = reflectedVector.normalized + GetRemainingVector(collision.contacts[0].normal, reflectedVector);
         }
         _rigidbody.velocity = _rigidbody.velocity.normalized * BallData.Speed;
     }
@@ -65,19 +65,20 @@ public class Ball : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private Vector3 AddNoiseOnAngle(float min, float max)
+    /// <summary>
+    /// Gets the remaining vector so bounces don't get stuck on one direction
+    /// </summary>
+    /// <param name="surfaceNormal"></param>
+    /// <param name="reflectedVector"></param>
+    /// <returns></returns>
+    private Vector3 GetRemainingVector(Vector3 surfaceNormal, Vector3 reflectedVector)
     {
-        // Find random angle between min & max inclusive
-        float xNoise = Random.Range(min, max);
-        float yNoise = Random.Range(min, max);
-        float zNoise = Random.Range(min, max);
-
-        // Convert Angle to Vector3
-        Vector3 noise = new Vector3(
-          Mathf.Sin(2 * Mathf.PI * xNoise / 360),
-          Mathf.Sin(2 * Mathf.PI * yNoise / 360),
-          Mathf.Sin(2 * Mathf.PI * zNoise / 360)
-        );
-        return noise;
+        float angleBetweenReflectedAndNormal = Vector2.Angle(reflectedVector, surfaceNormal);
+        if (angleBetweenReflectedAndNormal < _data.MinReflectionVector)
+        {
+            float angleToAdd = _data.MinReflectionVector - angleBetweenReflectedAndNormal;
+            return new Vector3(Mathf.Sign(reflectedVector.x) * Mathf.Cos(Mathf.Deg2Rad * angleToAdd), Mathf.Sign(reflectedVector.y) * Mathf.Sin(Mathf.Deg2Rad * angleToAdd), 0f);
+        }
+        return Vector3.zero;
     }
 }

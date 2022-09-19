@@ -16,3 +16,4 @@ MonoBehaviour:
   MinReflectionAngleNoise: -15
   MaxReflectionAngleNoise: 15
   MaxStartAngleOffset: 30
+  MinReflectionVector: 60

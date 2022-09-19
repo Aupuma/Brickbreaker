@@ -87,7 +87,7 @@ public class BoardManager : MonoBehaviour
     private Vector3 GetBrickPosition(int column, int row)
     {
         return new Vector3(_firstSpawnTransform.position.x + column * _boardParameters.SpaceBetweenColumns,
-                            _firstSpawnTransform.position.y + row * _boardParameters.SpaceBetweenRows,
+                            _firstSpawnTransform.position.y - row * _boardParameters.SpaceBetweenRows,
                             _firstSpawnTransform.position.z);
     }
 
