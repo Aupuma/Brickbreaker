@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BasicBrickData
   m_EditorClassIdentifier: 
   DestructionParticleSystem: {fileID: 0}
-  PowerUpToSpawn: {fileID: 0}
-  PowerupSpawnChance: 0.209
+  PowerUpToSpawn: {fileID: 1153242752034810052, guid: 1dd75e353a26bd7469f9968c28694cfe,
+    type: 3}
+  PowerupSpawnChance: 0.419
   HitsToDestroy: 1
   Score: 15
