@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ball Data", menuName = "ScriptableObjects/BallData")]
 public class BallData : ScriptableObject
 {
-    public static float InitialSpeed = 10f;
+    public static float InitialSpeed = 15f;
     public static float SpeedLevelIncrease = 5f;
     public static float Speed;
     public float WaitTime;
