@@ -33,5 +33,9 @@ public class LimitDetector : MonoBehaviour
             Ball ball = other.GetComponent<Ball>();
             BallLost?.Invoke(ball);
         }
+        if(other.tag == "PickUp")
+        {
+            PowerUpPickUp
+        }
     }
 }

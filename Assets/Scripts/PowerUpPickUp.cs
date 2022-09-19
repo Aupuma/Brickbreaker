@@ -5,16 +5,22 @@ using UnityEngine;
 public class PowerUpPickUp : MonoBehaviour
 {
     [SerializeField] private float _fallingSpeed;
+    [SerializeField] private PowerUpEffect _effect;
 
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody _rigidbody;
+
+    private void Awake()
     {
-        
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _rigidbody.velocity = Vector3.down * _fallingSpeed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.)
     }
 }

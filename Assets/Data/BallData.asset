@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BallData
   m_EditorClassIdentifier: 
   WaitTime: 1
-  MinReflectionAngleNoise: -5
-  MaxReflectionAngleNoise: 5
+  MinReflectionAngleNoise: -15
+  MaxReflectionAngleNoise: 15
   MaxStartAngleOffset: 30
