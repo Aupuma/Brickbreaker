@@ -21,6 +21,9 @@ public class PowerUpPickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.)
+        if(other.tag == "Paddle")
+        {
+
+        }
     }
 }
