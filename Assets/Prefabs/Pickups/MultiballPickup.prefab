@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98de8c537c39bfc43b09671fe1445c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fallingSpeed: 2
+  _fallingSpeed: 3
   _effectToSpawn: {fileID: 7829494156456237898, guid: 215442152fb8f61409fcb44424bcd8f4,
     type: 3}
 --- !u!33 &1239273326878855105

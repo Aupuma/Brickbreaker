@@ -64,6 +64,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1239273326878855155, guid: 9134bf398aed67640a0633f7558fc6e9,
         type: 3}
+      propertyPath: _fallingSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239273326878855155, guid: 9134bf398aed67640a0633f7558fc6e9,
+        type: 3}
       propertyPath: _effectToSpawn
       value: 
       objectReference: {fileID: 2433813457522322234, guid: 96a731f95e3ed4640a1aba70d8b47372,
