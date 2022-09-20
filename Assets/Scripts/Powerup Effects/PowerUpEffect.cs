@@ -34,7 +34,7 @@ public abstract class PowerUpEffect : MonoBehaviour
         StartEffect();
     }
 
-    private void DeactivateEffect()
+    public void DeactivateEffect()
     {
         _isEffectActive = false;
         EndEffect();

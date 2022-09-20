@@ -62,17 +62,8 @@ public class Brick : MonoBehaviour
     private void Explode()
     {
         //Instantiate(_data.DestructionParticleSystem);
-        SpawnPickupOnChance();
+        PickupManager.instance.SpawnPickupOnChance(_data.PickupToSpawn, _data.PowerupSpawnChance, transform.position);
         BrickManager.instance.RemoveBrick(this);
         Destroy(gameObject);
-    }
-
-    private void SpawnPickupOnChance()
-    {
-        float pickupChance = UnityEngine.Random.Range(0f, 1f);
-        if (pickupChance <= _data.PowerupSpawnChance && _data.PickupToSpawn != null)
-        {
-            Instantiate(_data.PickupToSpawn, transform.position, Quaternion.identity);
-        }
     }
 }

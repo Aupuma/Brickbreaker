@@ -66,7 +66,7 @@ public class BrickManager : MonoBehaviour
         {
             Brick brickInstance = _bricks[_bricks.Count - 1];
             _bricks.RemoveAt(_bricks.Count - 1);
-            Destroy(brickInstance);
+            Destroy(brickInstance.gameObject);
         }
         _bricks.Clear();
     }

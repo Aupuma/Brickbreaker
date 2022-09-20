@@ -24,11 +24,11 @@ public abstract class Pickup : MonoBehaviour
         if (other.tag == "Paddle")
         {
             Collect();
-            Destroy(gameObject);
+            PickupManager.instance.RemovePickup(this);
         }
         else if (other.tag == "Limit")
         {
-            Destroy(gameObject);
+            PickupManager.instance.RemovePickup(this);
         }
     }
 

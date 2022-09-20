@@ -111,6 +111,8 @@ public class GameManager : MonoBehaviour
     private void CompleteLevel()
     {
         _ballsManager.DestroyAllBalls();
+        PickupManager.instance.DestroyPickupsOnScreen();
+        DestroyPowerups();
         _paddle.IsInputEnabled = false;
         _uiManager.ShowLevelCompletedUI();
 
@@ -126,9 +128,19 @@ public class GameManager : MonoBehaviour
         PrepareGame();
     }
 
+    private void DestroyPowerups()
+    {
+        foreach (var item in FindObjectsOfType<PowerUpEffect>())
+        {
+            item.DeactivateEffect();
+        }
+    }
+
     private void FinishGame()
     {
         _paddle.IsInputEnabled = false;
+        PickupManager.instance.DestroyPickupsOnScreen();
+        DestroyPowerups();
         _uiManager.ShowGameOverUI();
     }
 }
