@@ -24,14 +24,6 @@ public class Ball : MonoBehaviour
         Invoke("Throw", _data.WaitTime);
     }
 
-    private void Throw()
-    {
-        float randomAngle = 90 + Random.Range(-_data.MaxStartAngleOffset, _data.MaxStartAngleOffset);
-        randomAngle *= Mathf.Deg2Rad;
-
-        _rigidbody.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * BallData.Speed;
-    }
-
     private void FixedUpdate()
     {
         _lastVelocity = _rigidbody.velocity;
@@ -41,6 +33,20 @@ public class Ball : MonoBehaviour
     {
         Bounce(collision);
         _audioSource.PlayOneShot(_bounceClip);
+    }
+
+    public void Explode()
+    {
+        // Instantiate(_explosionParticleSystem);
+        Destroy(gameObject);
+    }
+
+    private void Throw()
+    {
+        float randomAngle = 90 + Random.Range(-_data.MaxStartAngleOffset, _data.MaxStartAngleOffset);
+        randomAngle *= Mathf.Deg2Rad;
+
+        _rigidbody.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * BallData.Speed;
     }
 
     private void Bounce(Collision collision)
@@ -57,12 +63,6 @@ public class Ball : MonoBehaviour
             _rigidbody.velocity = reflectedVector.normalized + GetRemainingVector(collision.contacts[0].normal, reflectedVector);
         }
         _rigidbody.velocity = _rigidbody.velocity.normalized * BallData.Speed;
-    }
-
-    public void Explode()
-    {
-        // Instantiate(_explosionParticleSystem);
-        Destroy(gameObject);
     }
 
     /// <summary>

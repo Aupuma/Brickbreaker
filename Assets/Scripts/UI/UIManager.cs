@@ -59,8 +59,6 @@ public class UIManager : MonoBehaviour
         _scoreMarkerLabel.text = score.ToString();
     }
 
-
-
     public void ShowGameOverUI()
     {
         _gameOverUI.gameObject.SetActive(true);

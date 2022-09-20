@@ -43,6 +43,16 @@ public class Paddle : MonoBehaviour
         _speed = _initialSpeed;
     }
 
+    public Vector3 GetSpeedVector()
+    {
+        return new Vector3(_delta * _ballBounceSpeedInfluence, 0f, 0f);
+    }
+
+    public void IncreaseSpeed()
+    {
+        _speed += _speedLevelIncrease;
+    }
+
     private void ManageInput()
     {
         if (Input.GetMouseButton(0))
@@ -58,15 +68,5 @@ public class Paddle : MonoBehaviour
     private float Map(float input, float inputMin, float inputMax, float min, float max)
     {
         return min + (input - inputMin) * (max - min) / (inputMax - inputMin);
-    }
-
-    public Vector3 GetSpeedVector()
-    {
-        return new Vector3(_delta * _ballBounceSpeedInfluence, 0f, 0f);
-    }
-
-    public void IncreaseSpeed()
-    {
-        _speed += _speedLevelIncrease;
     }
 }
