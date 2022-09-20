@@ -8,7 +8,7 @@ public class Brick : MonoBehaviour
 {
     [SerializeField] private BrickScoreUI _scorePrefab;
     [SerializeField] private Transform _scoreSpawnTransform;
-
+    [SerializeField] private float _scaleUpDuration;
     [SerializeField] private BrickData _data;
 
     private Collider _collider;
@@ -17,6 +17,20 @@ public class Brick : MonoBehaviour
     private void Awake()
     {
         _collider = GetComponent<Collider>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ScaleUp(transform.localScale));
+    }
+
+    private IEnumerator ScaleUp(Vector3 finalScale)
+    {
+        for (float t = 0f; t <= 1f; t+=Time.deltaTime/ _scaleUpDuration)
+        {
+            transform.localScale = Vector3.Lerp(Vector3.zero, finalScale,t);
+            yield return null;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

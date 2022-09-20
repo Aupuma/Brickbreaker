@@ -145,4 +145,5 @@ MonoBehaviour:
   _scorePrefab: {fileID: 8131801492456683361, guid: 0bd22ce402c4e15468f7048764493b9d,
     type: 3}
   _scoreSpawnTransform: {fileID: 7872852722430980366}
+  _scaleUpDuration: 0.2
   _data: {fileID: 11400000, guid: 0d79340f8e1775940be36f3aa592f66e, type: 2}

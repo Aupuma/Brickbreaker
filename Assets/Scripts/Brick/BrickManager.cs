@@ -68,18 +68,23 @@ public class BrickManager : MonoBehaviour
     public void SpawnBoard()
     {
         ClearBoard();
+        StartCoroutine(SpawnBoardCoroutine());
+    }
 
+    private IEnumerator SpawnBoardCoroutine()
+    {
         for (int i = 0; i < _boardParameters.Columns; i++)
         {
             for (int j = 0; j < _boardParameters.Rows; j++)
             {
                 int brickId = GetBrickId();
                 Vector3 brickPosition = GetBrickPosition(i, j);
-
                 SpawnBrick(brickId, brickPosition);
+                yield return new WaitForSeconds(_timeBetweenBrickSpawns);
             }
         }
     }
+
 
     private void ClearBoard()
     {
@@ -99,11 +104,6 @@ public class BrickManager : MonoBehaviour
             brick.SetColliderToTrigger(isTrigger);
         }
     }
-
-    //private IEnumerator SpawnBoardCoroutine()
-    //{
-
-    //}
 
     private void SpawnBrick(int id, Vector3 position)
     {
