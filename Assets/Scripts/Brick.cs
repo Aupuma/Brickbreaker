@@ -38,9 +38,9 @@ public class Brick : MonoBehaviour
             //Instantiate(_data.DestructionParticleSystem);
 
             float powerupChance = UnityEngine.Random.Range(0f, 1f);
-            if(powerupChance <= _data.PowerupSpawnChance && _data.PowerUpToSpawn!=null)
+            if(powerupChance <= _data.PowerupSpawnChance && _data.PickupToSpawn!=null)
             {
-                Instantiate(_data.PowerUpToSpawn, transform.position,Quaternion.identity);
+                Instantiate(_data.PickupToSpawn, transform.position,Quaternion.identity);
             }
             
             BoardManager.instance.DecreaseBricks();

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _boardManager.BricksDestroyed += LevelComplete;
+        _boardManager.BricksDestroyed += CompleteLevel;
 
         _uiManager.GameOverUIShown += ResetGame;
 
@@ -33,6 +33,48 @@ public class GameManager : MonoBehaviour
         _ballsManager.AllBallsLost += LoseLife;
 
         Invoke("ResetGame", 1f);
+    }
+
+    private void OnDestroy()
+    {
+        _uiManager.LevelCompletedUIShown -= IncreaseLevel;
+        _uiManager.CountdownFinished -= StartGame;
+        _uiManager.GameOverUIShown -= ResetGame;
+        _boardManager.BricksDestroyed -= CompleteLevel;
+
+        _limitDetector.BallLost -= _ballsManager.LoseBall;
+        _ballsManager.AllBallsLost -= LoseLife;
+    }
+
+    public void AddScore(int score)
+    {
+        _score += score;
+        _uiManager.UpdateScoreMarker(_score);
+    }
+
+    public void LoseLife()
+    {
+        _lives--;
+        _uiManager.RemoveLifeUI();
+
+        if (_lives == 0)
+        {
+            FinishGame();
+        }
+        else
+        {
+            _ballsManager.CreateBall();
+        }
+    }
+
+    public void AddBalls(int amount)
+    {
+        _ballsManager.AddBalls(amount);
+    }
+
+    public void SetLimitActive(bool active)
+    {
+        _limitDetector.SetLimitActive(active);
     }
 
     private void ResetGame()
@@ -66,7 +108,7 @@ public class GameManager : MonoBehaviour
         _paddle.IsInputEnabled = true;
     }
 
-    private void LevelComplete()
+    private void CompleteLevel()
     {
         _ballsManager.DestroyAllBalls();
         _paddle.IsInputEnabled = false;
@@ -84,55 +126,9 @@ public class GameManager : MonoBehaviour
         PrepareGame();
     }
 
-    public void AddScore(int score)
-    {
-        _score += score;
-        _uiManager.UpdateScoreMarker(_score);
-    }
-
-    public void LoseLife()
-    {
-        _lives--;
-        _uiManager.RemoveLifeUI();
-
-        if(_lives == 0)
-        {
-            FinishGame();
-        }
-        else
-        {
-            _ballsManager.CreateBall();
-        }
-    }
-
-    public void AddBalls(int amount)
-    {
-        _ballsManager.AddBalls(amount);
-    }
-
-
     private void FinishGame()
     {
         _paddle.IsInputEnabled = false;
         _uiManager.ShowGameOverUI();
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnDestroy()
-    {
-        _uiManager.LevelCompletedUIShown -= IncreaseLevel;
-        _uiManager.CountdownFinished -= StartGame;
-        _uiManager.GameOverUIShown -= ResetGame;
-        _boardManager.BricksDestroyed -= LevelComplete;
-        
-        _limitDetector.BallLost -= _ballsManager.LoseBall;
-        _ballsManager.AllBallsLost -= LoseLife;
     }
 }

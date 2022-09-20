@@ -24,6 +24,7 @@ public abstract class Pickup : MonoBehaviour
         if (other.tag == "Paddle")
         {
             Collect();
+            Destroy(gameObject);
         }
         else if (other.tag == "Limit")
         {

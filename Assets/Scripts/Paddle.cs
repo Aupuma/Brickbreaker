@@ -25,6 +25,13 @@ public class Paddle : MonoBehaviour
         _isInputEnabled = false;
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (_isInputEnabled)
+            ManageInput();
+    }
+
     public void ResetPosition()
     {
         _xPosition = 0f;
@@ -34,13 +41,6 @@ public class Paddle : MonoBehaviour
     public void ResetSpeed()
     {
         _speed = _initialSpeed;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(_isInputEnabled)
-            ManageInput();
     }
 
     private void ManageInput()

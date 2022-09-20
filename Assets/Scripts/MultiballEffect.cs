@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Multiball : PowerUpEffect
+public class MultiballEffect : PowerUpEffect
 {
     [SerializeField] private int ballsToAdd;
 
