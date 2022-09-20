@@ -45,16 +45,9 @@ public class Paddle : MonoBehaviour
 
     private void ManageInput()
     {
-        //_delta = Input.GetAxis(_inputAxisName) * _speed * Time.deltaTime;
-        //_xPosition = Mathf.Clamp(_xPosition + _delta, -_xMovementRange, _xMovementRange);
-
-        //transform.position = new Vector3(_xPosition, transform.position.y, transform.position.z);
-
         if (Input.GetMouseButton(0))
         {
             float targetX = Map(Camera.main.ScreenToViewportPoint(Input.mousePosition).x, 0f, 1f, -_xMovementRange, _xMovementRange);
-            //float targetX = Map(Input.mousePosition.normalized.x, 0f, 1f, -_xMovementRange, _xMovementRange);
-
             targetX = Mathf.Clamp(targetX, -_xMovementRange, _xMovementRange);
             float movementX = Mathf.MoveTowards(transform.position.x, targetX, _speed * Time.deltaTime);
             transform.position = new Vector3(movementX, transform.position.y, transform.position.z);

@@ -3,32 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpPickUp : MonoBehaviour
+public class PowerUpPickUp : Pickup
 {
-    [SerializeField] private float _fallingSpeed;
+    [SerializeField] PowerUpEffect _effectToSpawn;
 
-    private Rigidbody _rigidbody;
-
-    public event Action Collected;
-
-    private void Awake()
+    public override void Collect()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Instantiate(_effectToSpawn);
     }
-
-    private void Start()
-    {
-        _rigidbody.velocity = Vector3.down * _fallingSpeed;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Paddle")
-        {
-            Collected?.Invoke();
-            gameObject.SetActive(false);
-        }
-
-    }
-
 }

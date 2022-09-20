@@ -10,6 +10,11 @@ public abstract class PowerUpEffect : MonoBehaviour
     private bool _isEffectActive;
     private float _effectTimer;
 
+    private void Start()
+    {
+        ActivateEffect();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,6 +39,7 @@ public abstract class PowerUpEffect : MonoBehaviour
     {
         _isEffectActive = false;
         EndEffect();
+        Destroy(gameObject);
     }
 
     protected abstract void StartEffect();
