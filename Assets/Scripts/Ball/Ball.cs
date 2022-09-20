@@ -7,6 +7,11 @@ public class Ball : MonoBehaviour
     [SerializeField] BallData _data;
     [SerializeField] GameObject _explosionParticleSystem;
     [SerializeField] AudioClip _bounceClip;
+    [SerializeField] TrailRenderer trail;
+    [SerializeField] ParticleSystem fireParticleSystem;
+
+    [SerializeField] Gradient normalTrailColor;
+    [SerializeField] Gradient fireTrailColor;
 
     private AudioSource _audioSource;
     private Rigidbody _rigidbody;
@@ -33,6 +38,20 @@ public class Ball : MonoBehaviour
     {
         Bounce(collision);
         _audioSource.PlayOneShot(_bounceClip);
+    }
+
+    public void SetFireballActive(bool isActive)
+    {
+        if (isActive)
+        {
+            trail.colorGradient = fireTrailColor;
+            fireParticleSystem.Play();
+        }
+        else
+        {
+            trail.colorGradient = normalTrailColor; 
+            fireParticleSystem.Stop();
+        }
     }
 
     public void Explode()

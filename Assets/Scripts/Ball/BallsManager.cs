@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class BallsManager : MonoBehaviour
 {
+    public static BallsManager instance;
+
     [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _ballSpawnTransform;
     private List<Ball> _balls;
 
     public event Action AllBallsLost;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +47,14 @@ public class BallsManager : MonoBehaviour
         if(_balls.Count == 0)
         {
             AllBallsLost?.Invoke();
+        }
+    }
+
+    public void SetBallsOnFire(bool active)
+    {
+        foreach (var ball in _balls)
+        {
+            ball.SetFireballActive(active);
         }
     }
 
