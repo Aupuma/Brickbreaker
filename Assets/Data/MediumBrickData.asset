@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MediumBrickData
   m_EditorClassIdentifier: 
   DestructionParticleSystem: {fileID: 0}
-  PowerUpToSpawn: {fileID: 0}
-  PowerupSpawnChance: 0.493
+  PickupToSpawn: {fileID: 2956313919337853470, guid: b599163ffee696547add0ab3b771f6fa,
+    type: 3}
+  PowerupSpawnChance: 0.3
   HitsToDestroy: 2
   Score: 30

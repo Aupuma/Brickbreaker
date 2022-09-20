@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] private BoardManager _boardManager;
+    [SerializeField] private BrickManager _bricksManager;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private BallsManager _ballsManager; 
     [SerializeField] private LimitDetector _limitDetector;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _boardManager.BricksDestroyed += CompleteLevel;
+        _bricksManager.BricksDestroyed += CompleteLevel;
 
         _uiManager.GameOverUIShown += ResetGame;
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         _uiManager.LevelCompletedUIShown -= IncreaseLevel;
         _uiManager.CountdownFinished -= StartGame;
         _uiManager.GameOverUIShown -= ResetGame;
-        _boardManager.BricksDestroyed -= CompleteLevel;
+        _bricksManager.BricksDestroyed -= CompleteLevel;
 
         _limitDetector.BallLost -= _ballsManager.LoseBall;
         _ballsManager.AllBallsLost -= LoseLife;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     private void PrepareGame()
     {
-        _boardManager.SpawnBoard();
+        _bricksManager.SpawnBoard();
         _paddle.ResetPosition();
         _uiManager.StartCountdown();
 

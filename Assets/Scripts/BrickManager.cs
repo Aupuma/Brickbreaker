@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardManager : MonoBehaviour
+public class BrickManager : MonoBehaviour
 {
-    public static BoardManager instance;
+    public static BrickManager instance;
 
     [Serializable]
     public struct BoardParameters
@@ -22,7 +22,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] float _timeBetweenBrickSpawns;
     [SerializeField] private BoardParameters _boardParameters;
 
-    private int _bricksAmount;
+    private List<Brick> _bricks;
 
     public event Action BricksDestroyed;
 
@@ -33,7 +33,7 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
-        //SpawnBoard();
+        _bricks = new List<Brick>();
     }
 
     /// <summary>
@@ -42,11 +42,11 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SpawnBoard()
     {
-        _bricksAmount = 0;
-        foreach (var item in _boardParent.GetComponentsInChildren<Brick>())
-        {
-            DestroyImmediate(item.gameObject);
-        }
+        //foreach (var item in _boardParent.GetComponentsInChildren<Brick>())
+        //{
+        //    DestroyImmediate(item.gameObject);
+        //}
+        ClearBoard();
 
         for (int i = 0; i < _boardParameters.Columns; i++)
         {
@@ -57,6 +57,25 @@ public class BoardManager : MonoBehaviour
 
                 SpawnBrick(brickId, brickPosition);
             }
+        }
+    }
+
+    private void ClearBoard()
+    {
+        while (_bricks.Count > 0)
+        {
+            Brick brickInstance = _bricks[_bricks.Count - 1];
+            _bricks.RemoveAt(_bricks.Count - 1);
+            Destroy(brickInstance);
+        }
+        _bricks.Clear();
+    }
+
+    public void SetBricksToTrigger(bool isTrigger)
+    {
+        foreach (var brick in _bricks)
+        {
+            brick.SetColliderToTrigger(isTrigger);
         }
     }
 
@@ -72,13 +91,14 @@ public class BoardManager : MonoBehaviour
 
         Brick brickInstance = Instantiate(_brickPrefabs[id], position, Quaternion.identity);
         brickInstance.transform.SetParent(_boardParent);
-        _bricksAmount++;
+        _bricks.Add(brickInstance);
     }
 
-    public void DecreaseBricks()
+    public void RemoveBrick(Brick brickToRemove)
     {
-        _bricksAmount--;
-        if(_bricksAmount == 0)
+        _bricks.Remove(brickToRemove);
+
+        if(_bricks.Count == 0)
         {
             BricksDestroyed?.Invoke();
         }

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockLimitEffect : PowerUpEffect
+public class FireballEffect : PowerUpEffect
 {
     protected override void StartEffect()
     {
-        GameManager.instance.SetLimitActive(false);
+        BrickManager.instance.SetBricksToTrigger(true);
     }
 
     protected override void EndEffect()
     {
-        GameManager.instance.SetLimitActive(true);
+        BrickManager.instance.SetBricksToTrigger(false);
     }
 }

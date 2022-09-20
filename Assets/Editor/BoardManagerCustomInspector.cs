@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BoardManager))]
+[CustomEditor(typeof(BrickManager))]
 public class BoardManagerCustomInspector : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        BoardManager boardManager = (BoardManager)target;
+        BrickManager boardManager = (BrickManager)target;
         if(GUILayout.Button("Create Board"))
         {
             boardManager.SpawnBoard();
