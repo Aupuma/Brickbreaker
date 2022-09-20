@@ -11,9 +11,9 @@ public class BoardManagerCustomInspector : Editor
         base.OnInspectorGUI();
 
         BrickManager boardManager = (BrickManager)target;
-        if(GUILayout.Button("Create Board"))
+        if(GUILayout.Button("Create test board"))
         {
-            boardManager.SpawnBoard();
+            boardManager.SpawnTestBoard();
         }
     }
 }

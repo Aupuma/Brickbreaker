@@ -34,6 +34,31 @@ public class BrickManager : MonoBehaviour
     private void Start()
     {
         _bricks = new List<Brick>();
+        DestroyTestBoard();
+    }
+
+    public void SpawnTestBoard()
+    {
+        DestroyTestBoard();
+
+        for (int i = 0; i < _boardParameters.Columns; i++)
+        {
+            for (int j = 0; j < _boardParameters.Rows; j++)
+            {
+                int brickId = GetBrickId();
+                Vector3 brickPosition = GetBrickPosition(i, j);
+
+                SpawnBrick(brickId, brickPosition);
+            }
+        }
+    }
+
+    private void DestroyTestBoard()
+    {
+        foreach (var item in _boardParent.GetComponentsInChildren<Brick>())
+        {
+            DestroyImmediate(item.gameObject);
+        }
     }
 
     /// <summary>
@@ -42,10 +67,6 @@ public class BrickManager : MonoBehaviour
     /// </summary>
     public void SpawnBoard()
     {
-        //foreach (var item in _boardParent.GetComponentsInChildren<Brick>())
-        //{
-        //    DestroyImmediate(item.gameObject);
-        //}
         ClearBoard();
 
         for (int i = 0; i < _boardParameters.Columns; i++)
