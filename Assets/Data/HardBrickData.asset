@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HardBrickData
   m_EditorClassIdentifier: 
   DestructionParticleSystem: {fileID: 0}
-  PowerUpToSpawn: {fileID: 0}
+  PickupToSpawn: {fileID: 8991784198271369458, guid: 43f3c2b8425670f44bf1312c2d531372,
+    type: 3}
   PowerupSpawnChance: 0.816
   HitsToDestroy: 3
   Score: 50
